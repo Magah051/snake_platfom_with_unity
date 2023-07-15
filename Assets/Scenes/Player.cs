@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rig;
 
+    private bool isJumping;
+
     
     // Start is called before the first frame update
     void Start()
@@ -21,9 +23,18 @@ public class Player : MonoBehaviour
     {
         rig.velocity = new Vector2(Speed, rig.velocity.y);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !isJumping)
         {
             rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D colisor)
+    {
+        if (colisor.gameObject.layer == 8)
+        {
+            isJumping = false;
         }
     }
 }
