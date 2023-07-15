@@ -20,5 +20,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         rig.velocity = new Vector2(Speed, rig.velocity.y);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            rig.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        }
     }
 }
